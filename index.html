@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cuenta Gotas - Extractor de color y paletas armonicas para Chrome, Edge y Brave</title>
+  <meta name="description" content="Extension de navegador que captura el color exacto de cualquier punto de la pantalla y te sugiere paletas armonicas al instante." />
+  <link rel="icon" href="img/logo.png" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+
+  <header class="nav">
+    <div class="container nav-inner">
+      <a href="#" class="brand">
+        <img src="img/logo.png" alt="Cuenta Gotas" class="brand-logo" />
+        <span>Cuenta Gotas</span>
+      </a>
+      <nav class="nav-links">
+        <a href="#playground">Playground</a>
+        <a href="#features">Caracteristicas</a>
+        <a href="#install">Instalacion</a>
+        <a href="https://github.com/LangCarmine/cuenta-gotas" target="_blank" rel="noopener">GitHub</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="hero">
+      <div class="container hero-inner">
+        <div class="hero-text">
+          <span class="badge">Funciona en Chrome, Edge, Brave y Opera</span>
+          <h1>Captura cualquier color <span class="accent">y descubre con que combinarlo</span>.</h1>
+          <p class="lead">
+            Selecciona un punto de la pantalla, obten su codigo HEX exacto
+            y recibe paletas armonicas listas para usar en tus disenos.
+            Todo local, sin cuentas, sin telemetria.
+          </p>
+          <div class="hero-actions">
+            <a href="cuenta-gotas.zip" download class="btn btn-primary">Descargar</a>
+            <a href="#playground" class="btn btn-ghost">Probar el playground</a>
+          </div>
+          <p class="hero-note">Version 1.0.0 - Gratis - Codigo abierto</p>
+        </div>
+        <div class="hero-visual">
+          <video class="demo-video" src="img/demo.mp4" autoplay loop muted playsinline poster="img/logo.png"></video>
+        </div>
+      </div>
+    </section>
+
+    <section id="playground" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Playground de color</h2>
+        <p class="section-subtitle">
+          Introduce un color y mira las mejores combinaciones al instante.
+        </p>
+
+        <div class="playground">
+
+          <div class="playground-input">
+            <label class="pg-label" for="colorPicker">Elige tu color base</label>
+            <div class="pg-color-row">
+              <div class="pg-swatch-wrap">
+                <input type="color" id="colorPicker" value="#ec4899" />
+              </div>
+              <input type="text" id="hexInput" class="pg-hex-input" maxlength="7" value="#EC4899" spellcheck="false" />
+              <button class="pg-random" id="randomBtn" title="Color aleatorio">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 3 21 3 21 8"/><line x1="4" y1="20" x2="21" y2="3"/><polyline points="21 16 21 21 16 21"/><line x1="15" y1="15" x2="21" y2="21"/><line x1="4" y1="4" x2="9" y2="9"/></svg>
+              </button>
+            </div>
+
+            <div class="pg-info">
+              <div class="pg-info-item"><strong>HEX</strong><span id="infoHex">#EC4899</span></div>
+              <div class="pg-info-item"><strong>RGB</strong><span id="infoRgb">rgb(236, 72, 153)</span></div>
+              <div class="pg-info-item"><strong>HSL</strong><span id="infoHsl">hsl(330, 81%, 60%)</span></div>
+            </div>
+
+            <div class="pg-contrast">
+              <h4 class="pg-subtitle">Contraste de texto</h4>
+              <div class="pg-contrast-row">
+                <div class="contrast-box" id="contrastWhite">
+                  <span>Texto blanco</span>
+                  <strong id="contrastWhiteVal">-</strong>
+                </div>
+                <div class="contrast-box" id="contrastBlack">
+                  <span>Texto negro</span>
+                  <strong id="contrastBlackVal">-</strong>
+                </div>
+              </div>
+              <p class="pg-contrast-note" id="contrastNote">-</p>
+            </div>
+          </div>
+
+          <div class="playground-palettes">
+            <div class="palette-group">
+              <h3 class="palette-title">Complementaria</h3>
+              <p class="palette-desc">Maximo contraste. Perfecta para llamar la atencion.</p>
+              <div class="palette-row" id="paletteComplementary"></div>
+            </div>
+
+            <div class="palette-group">
+              <h3 class="palette-title">Analoga</h3>
+              <p class="palette-desc">Colores vecinos en el circulo cromatico. Armonia suave.</p>
+              <div class="palette-row" id="paletteAnalogous"></div>
+            </div>
+
+            <div class="palette-group">
+              <h3 class="palette-title">Triadica</h3>
+              <p class="palette-desc">Tres colores equidistantes. Vibrante y equilibrada.</p>
+              <div class="palette-row" id="paletteTriadic"></div>
+            </div>
+
+            <div class="palette-group">
+              <h3 class="palette-title">Tetradica</h3>
+              <p class="palette-desc">Cuatro colores. Rica en matices, ideal para ilustracion.</p>
+              <div class="palette-row" id="paletteTetradic"></div>
+            </div>
+
+            <div class="palette-group">
+              <h3 class="palette-title">Monocromatica</h3>
+              <p class="palette-desc">Variaciones de luminosidad del mismo tono.</p>
+              <div class="palette-row" id="paletteMonochrome"></div>
+            </div>
+
+            <div class="palette-group">
+              <h3 class="palette-title">Tonos pastel</h3>
+              <p class="palette-desc">Suaviza tu color para interfaces delicadas.</p>
+              <div class="palette-row" id="palettePastel"></div>
+            </div>
+
+            <div class="palette-group">
+              <h3 class="palette-title">Tonos profundos</h3>
+              <p class="palette-desc">Versiones oscuras. Perfectas para fondos.</p>
+              <div class="palette-row" id="paletteDeep"></div>
+            </div>
+
+            <div class="palette-group">
+              <h3 class="palette-title">UI lista para usar</h3>
+              <p class="palette-desc">Fondo, superficie, texto, acento y estados.</p>
+              <div class="palette-row palette-row-labeled" id="paletteUI"></div>
+            </div>
+          </div>
+
+        </div>
+
+        <div class="callout callout-center" style="margin-top: 40px;">
+          <strong>Tip:</strong> haz clic en cualquier swatch para copiar su codigo HEX al portapapeles.
+        </div>
+      </div>
+    </section>
+
+    <section id="features" class="section">
+      <div class="container">
+        <h2 class="section-title">Todo lo que hace</h2>
+        <p class="section-subtitle">Cuenta Gotas, la navaja suiza del color.</p>
+
+        <div class="grid">
+          <article class="card">
+            <h3>Cuentagotas nativo</h3>
+            <p>Usa la API EyeDropper de Chrome para capturar cualquier pixel de la pantalla con precision absoluta.</p>
+          </article>
+          <article class="card">
+            <h3>Paletas automaticas</h3>
+            <p>Cada color capturado genera 10 combinaciones armonicas al instante: complementaria, analoga, triadica, tetradica y mas.</p>
+          </article>
+          <article class="card">
+            <h3>HEX, RGB y HSL</h3>
+            <p>Consulta el color en el formato que necesites y copialo con un solo clic.</p>
+          </article>
+          <article class="card">
+            <h3>Historial persistente</h3>
+            <p>La extension recuerda el ultimo color capturado aunque cierres el popup.</p>
+          </article>
+          <article class="card">
+            <h3>100% local</h3>
+            <p>No hay servidores, no hay telemetria, no hay cuentas. Todo se procesa en tu navegador.</p>
+          </article>
+          <article class="card">
+            <h3>Codigo abierto</h3>
+            <p>Disponible en GitHub bajo licencia MIT. Puedes revisarlo y adaptarlo.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="install" class="section section-alt">
+      <div class="container">
+        <h2 class="section-title">Como instalar</h2>
+        <p class="section-subtitle">Elige tu navegador. Tarda menos de un minuto.</p>
+
+        <div class="browsers">
+
+          <div class="browser-col">
+            <div class="browser-header">
+              <div class="browser-icon edge">
+                <img src="img/edge.png" alt="Microsoft Edge" />
+              </div>
+              <h3>Microsoft Edge</h3>
+            </div>
+            <ol class="browser-steps">
+              <li>Descarga el <a href="cuenta-gotas.zip" download>archivo ZIP</a> y descomprimelo en una carpeta.</li>
+              <li>En la barra de direcciones escribe <code>edge://extensions</code> y pulsa Enter.</li>
+              <li>Activa el interruptor <strong>"Modo para desarrolladores"</strong>.</li>
+              <li>Haz clic en <strong>"Cargar descomprimido"</strong>.</li>
+              <li>Selecciona la carpeta que descomprimiste.</li>
+            </ol>
+            <a href="cuenta-gotas.zip" download class="btn btn-primary btn-block">Descargar para Edge</a>
+          </div>
+
+          <div class="browser-col">
+            <div class="browser-header">
+              <div class="browser-icon chrome">
+                <img src="img/chrome.png" alt="Google Chrome" />
+              </div>
+              <h3>Google Chrome</h3>
+            </div>
+            <ol class="browser-steps">
+              <li>Descarga el <a href="cuenta-gotas.zip" download>archivo ZIP</a> y descomprimelo en una carpeta.</li>
+              <li>En la barra de direcciones escribe <code>chrome://extensions</code> y pulsa Enter.</li>
+              <li>Activa el interruptor <strong>"Modo de desarrollador"</strong>.</li>
+              <li>Haz clic en <strong>"Cargar descomprimida"</strong>.</li>
+              <li>Selecciona la carpeta que descomprimiste.</li>
+            </ol>
+            <a href="cuenta-gotas.zip" download class="btn btn-primary btn-block">Descargar para Chrome</a>
+          </div>
+
+          <div class="browser-col">
+            <div class="browser-header">
+              <div class="browser-icon brave">
+                <img src="img/brave.png" alt="Brave" />
+              </div>
+              <h3>Brave</h3>
+            </div>
+            <ol class="browser-steps">
+              <li>Descarga el <a href="cuenta-gotas.zip" download>archivo ZIP</a> y descomprimelo en una carpeta.</li>
+              <li>En la barra de direcciones escribe <code>brave://extensions</code> y pulsa Enter.</li>
+              <li>Activa el interruptor <strong>"Modo de desarrollador"</strong>.</li>
+              <li>Haz clic en <strong>"Cargar descomprimida"</strong>.</li>
+              <li>Selecciona la carpeta que descomprimiste.</li>
+            </ol>
+            <a href="cuenta-gotas.zip" download class="btn btn-primary btn-block">Descargar para Brave</a>
+          </div>
+
+        </div>
+
+        <div class="callout callout-center">
+          <strong>Consejo:</strong> usa la extension desde el icono de la barra. Pulsas "Capturar", mueves el raton y haces clic sobre el color.
+        </div>
+      </div>
+    </section>
+
+    <section class="cta-final">
+      <div class="container cta-inner">
+        <h2>Listo para probarla?</h2>
+        <p>Gratis, sin registro y sin letra chica.</p>
+        <a href="cuenta-gotas.zip" download class="btn btn-primary btn-lg">Descargar Cuenta Gotas</a>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container footer-inner">
+      <div>
+        <p class="brand-footer">Cuenta Gotas</p>
+        <p class="muted">Hecho por <a href="https://github.com/LangCarmine" target="_blank" rel="noopener">Christofer (LangOsta)</a></p>
+      </div>
+      <div class="footer-links">
+        <a href="https://github.com/LangCarmine/cuenta-gotas" target="_blank" rel="noopener">GitHub</a>
+        <a href="https://www.instagram.com/langosta007/" target="_blank" rel="noopener">Instagram</a>
+        <a href="https://linktr.ee/LangOsta007" target="_blank" rel="noopener">Linktree</a>
+        <a href="#install">Instalacion</a>
+      </div>
+    </div>
+    <div class="container">
+      <p class="copyright">2026 Cuenta Gotas. Hecho por LangOsta. Codigo abierto bajo licencia MIT</p>
+    </div>
+  </footer>
+
+  <script src="script.js"></script>
+</body>
+</html>
